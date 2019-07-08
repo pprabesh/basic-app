@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <EditText
+        android:id="@+id/searchEdt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="#eee"
+        android:drawableStart="@drawable/search"
+        android:drawablePadding="5dp"
+        android:hint="Search Company Here"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/close_search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginRight="10dp" />
+
+    <ImageView
+        android:id="@+id/close_search"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        android:padding="5dp"
+        android:src="@drawable/close"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/searchEdt"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchEdt" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:padding="5dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchEdt" />
+
+    <TextView
+        android:id="@+id/news_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Stock News"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchEdt" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/news_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#33ffffff"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/news_lbl" />
+
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/progressbar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/search_recycler"
+        app:layout_constraintLeft_toLeftOf="@id/search_recycler"
+        app:layout_constraintRight_toRightOf="@id/search_recycler"
+        app:layout_constraintTop_toTopOf="@id/search_recycler" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
