@@ -1,7 +1,6 @@
 package com.example.newstockMarkt;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -61,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         newsRecycler.setAdapter(newsAdapter);
-        // Tag used to cancel the request
-
         companySearchEdit = findViewById(R.id.searchEdt);
         final RecyclerView searchRecycler = findViewById(R.id.search_recycler);
         final View clearSearchBtn = findViewById(R.id.close_search);
@@ -88,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 searchRecycler.setVisibility(View.VISIBLE);
                 searchRecycler.bringToFront();
                 progressBar.bringToFront();
-                if(charSequence.length() > 0){
+                if (charSequence.length() > 0) {
 
                     String searchUrl = Utils.getSearchApi(charSequence.toString());
                     JsonObjectRequest searchJsonObj = new JsonObjectRequest(Request.Method.GET,
@@ -124,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                     MainApp.getInstance().addToRequestQueue(searchJsonObj);
                 } else {
+                    //if empty search text clear the previous search data and remove the search recycler view
                     companyData.clear();
                     progressBar.setVisibility(View.GONE);
                     companySearchAdapter.notifyDataSetChanged();
@@ -156,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
           @Override
           public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
               super.onScrolled(recyclerView, dx, dy);
+              // At the end of recyclerview get more data with new pageIndex value (PageNo++ = 20 more news data )
               if(!recyclerView.canScrollVertically(1) && dy != 0)
               {
                   pageNo++;
@@ -180,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void callNewsApi(){
-        String tag_json_obj = "json_obj_req";
         String url = Utils.getNewsApiUrl(Utils.dateToStr("yyyy-MM-dd", new Date()), pageNo);
         final ProgressBar progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
@@ -200,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                                 newsModel.setPublicer(jsonObject.getString("author"));
                                 newsModel.setNewsUrl(jsonObject.getString("url"));
                                 newsModel.setThumbNailUrl(jsonObject.getString("urlToImage"));
-                                newsModel.setPublishedDate(jsonObject.getString("publishedAt"));
+                                newsModel.setPublishedDate(Utils.changeDateFormat(jsonObject.getString("publishedAt").replace("T"," "),"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm"));
                                 newsData.add(newsModel);
                             }
                             newsAdapter.notifyDataSetChanged();
@@ -216,6 +214,6 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
-        MainApp.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        MainApp.getInstance().addToRequestQueue(jsonObjReq);
     }
 }

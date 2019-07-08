@@ -6,6 +6,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Utils {
     public static String dateToStr(String format, Date date) {
@@ -34,6 +35,20 @@ public class Utils {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    public static String changeDateFormat(String date, String inputDateFormat, String outputDateFormat) {
+        try {
+
+            SimpleDateFormat input = new SimpleDateFormat(inputDateFormat);
+            input.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date dateValue = input.parse(date);
+            SimpleDateFormat output = new SimpleDateFormat(outputDateFormat);
+            output.setTimeZone(TimeZone.getDefault());
+            return output.format(dateValue);
+        } catch (Exception ex) {
+            return "";
         }
     }
 }

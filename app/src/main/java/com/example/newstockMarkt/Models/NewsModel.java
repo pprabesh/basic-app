@@ -21,7 +21,12 @@ public class NewsModel {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        if (title == null || title.equals("null")) {
+
+            this.title = "";
+        } else {
+            this.title = title;
+        }
     }
 
     public String getPublishedDate() {
@@ -45,7 +50,12 @@ public class NewsModel {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (description == null || description.equals("null")) {
+
+            this.description = "";
+        } else {
+            this.description = description;
+        }
     }
 
     public String getPublicer() {
@@ -53,7 +63,12 @@ public class NewsModel {
     }
 
     public void setPublicer(String publicer) {
-        this.publicer = publicer;
+        if (publicer == null || publicer.equals("null")) {
+
+            this.publicer = "";
+        } else {
+            this.publicer = publicer;
+        }
     }
 
 
